@@ -1,19 +1,24 @@
-// src/database/migrations/helpers/audit-columns.ts
-import { TableColumn } from 'typeorm';
+import { TableColumn } from "typeorm";
 
-export class AuditColumns {
-  static get(): TableColumn[] {
-    return [
-      new TableColumn({
-        name: 'createdAt',
-        type: 'timestamp with time zone',
-        default: 'NOW()',
-      }),
-      new TableColumn({
-        name: 'updatedAt',
-        type: 'timestamp with time zone',
-        default: 'NOW()',
-      })
-    ];
-  }
-}
+// helper function to get base columns
+export const baseColumns = (): TableColumn[] => [
+    new TableColumn({
+        name: "id",
+        type: "int",
+        isPrimary: true,
+        isGenerated: true,
+        generationStrategy: "increment",
+    }),
+    new TableColumn({
+        name: "createdAt",
+        type: "timestamptz",
+        default: "now()",
+        isNullable: false,
+    }),
+    new TableColumn({
+        name: "updatedAt",
+        type: "timestamptz",
+        default: "now()",
+        isNullable: false,
+    }),
+];
