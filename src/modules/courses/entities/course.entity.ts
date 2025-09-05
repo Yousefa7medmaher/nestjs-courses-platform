@@ -4,8 +4,10 @@ import { Program } from '../../programs/entities/program.entity';
 import { Lesson } from '../../lessons/entities/lesson.entity';
 import { User } from '../../users/entities/user.entity';
 import  { CourseEnrollment } from  '../../course-enrollment/entities/course-enrollment.entity';
+import { AuditableEntity } from '../../common/entities/audit-table.entity' ;
+
 @Entity('courses')
-export class Course {
+export class Course extends AuditableEntity   {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,11 +26,6 @@ export class Course {
   @Column({ type: 'varchar', length: 500, nullable: true })
   thumbnailURL: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @OneToMany(() => Lesson, (lesson) => lesson.course)
   lessons: Lesson[];

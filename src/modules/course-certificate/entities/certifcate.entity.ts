@@ -7,9 +7,10 @@ import {
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { CourseEnrollment } from '../../course-enrollment/entities/course-enrollment.entity';
+import { AuditableEntity } from '../../common/entities/audit-table.entity' ;
 
 @Entity('Course-certificates')
-export class CourseCertificate {
+export class CourseCertificate  extends  AuditableEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -32,6 +33,5 @@ user: User;
   @Column({ type: 'date', nullable: true })
   expiryDate?: Date;
 
-  @CreateDateColumn({ type: 'timestamptz' })
-  createdAt: Date;
+
 }

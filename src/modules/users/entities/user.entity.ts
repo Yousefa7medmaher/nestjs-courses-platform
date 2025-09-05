@@ -11,10 +11,11 @@ import { CourseEnrollment } from '../../course-enrollment/entities/course-enroll
 import { CourseCertificate } from '../../course-certificate/entities/certifcate.entity';
 import { ProgramCertificate} from '../../program-certificate/entities/program-certificate.entity';
 import { UserRole } from '../../common/enums/user-role.enum';
+import { AuditableEntity } from '../../common/entities/audit-table.entity' ; 
 
 
 @Entity('users')
-export class User {
+export class User  extends AuditableEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -40,11 +41,6 @@ export class User {
   })
   role: UserRole;
 
-  @CreateDateColumn({ type: 'timestamp with time zone' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ type: 'timestamp with time zone' })
-  updatedAt: Date;
 
   @OneToMany(() => Course, (course) => course.instructor)
   courses: Course[];

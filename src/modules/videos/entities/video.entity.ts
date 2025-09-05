@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { LessonContent } from '../../lesson-contents/entities/lesson-content.entity';
-
+import  {AuditableEntity  } from '../../common/entities/audit-table.entity';
 @Entity('videos')
-export class Video {
+export class Video  extends AuditableEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,12 +20,6 @@ export class Video {
 
   @Column({ type: 'varchar', length: 500, nullable: true })
   thumbnailURL: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @OneToOne(() => LessonContent, (content) => content.video, { onDelete: 'CASCADE' })
   content: LessonContent;

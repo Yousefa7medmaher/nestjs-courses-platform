@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsOptional, IsNumber, IsDateString, IsString } from 'class-validator';
-import { EnrollmentStatus } from '../entities/program-enrollment.entity';
+import { EnrollmentStatus } from '../../common/enums/enrollment-status.enum';
 
 export class CreateProgramEnrollmentDto {
   @IsEnum(EnrollmentStatus)

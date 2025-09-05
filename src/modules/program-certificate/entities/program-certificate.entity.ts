@@ -6,7 +6,8 @@ import {
   CreateDateColumn 
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
- 
+import { AuditableEntity } from '../../common/entities/audit-table.entity'; 
+
 @Entity('Program-certificates')
 export class ProgramCertificate {
   @PrimaryGeneratedColumn()
@@ -23,7 +24,5 @@ export class ProgramCertificate {
 
   @Column({ type: 'date', nullable: true })
   expiryDate?: Date;
-
-  @CreateDateColumn({ type: 'timestamptz' })
-  createdAt: Date;
+ 
 }

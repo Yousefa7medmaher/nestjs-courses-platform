@@ -2,6 +2,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Course } from '../../courses/entities/course.entity';
 import { LessonContent } from '../../lesson-contents/entities/lesson-content.entity';
+import {  AuditableEntity } from '../../common/entities/audit-table.entity' ; 
 
 @Entity('lessons')
 export class Lesson {
@@ -19,12 +20,6 @@ export class Lesson {
 
   @Column({ type: 'varchar', length: 500, nullable: true })
   coverImageURL?: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @ManyToOne(() => Course, (course) => course.lessons)
   course: Course;

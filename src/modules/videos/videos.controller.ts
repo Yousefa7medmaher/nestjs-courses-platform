@@ -32,15 +32,15 @@ export class VideosController {
     return this.videosService.findOne(id);
   }
 
-    @Post(':id/upload-file')
-    @Roles(UserRole.INSTRUCTOR, UserRole.ADMIN)
-    @UploadFile({ fieldName: 'file', destination: './uploads/lesson-videos', fileType: 'video' })
-    async uploadVideoFile(
-      @Param('id', ParseIntPipe) id: number,
-      @UploadedFile() file: Express.Multer.File
-    ) {
-       return this.videosService.updateVideoFile(id, file.filename);
-    }
+  @Post(':id/upload-file')
+  @Roles(UserRole.INSTRUCTOR, UserRole.ADMIN)
+  @UploadFile({ fieldName: 'file', destination: './uploads/lesson-videos', fileType: 'video' })
+  async uploadVideoFile(
+    @Param('id', ParseIntPipe) id: number,
+    @UploadedFile() file: Express.Multer.File
+  ) {
+     return this.videosService.updateVideoFile(id, file.filename);
+  }
 
   // Only instructors and admins can update videos
   @Patch(':id')

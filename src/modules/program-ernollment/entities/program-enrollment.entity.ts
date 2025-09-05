@@ -1,17 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, OneToMany, UpdateDateColumn } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { Program } from '../../programs/entities/program.entity';
-import { ProgramCertificate } from '../../program-certificate/entities/program-certificate.entity'  ; 
-
- export enum EnrollmentStatus {
-  ACTIVE = 'active',
-  COMPLETED = 'completed',
-  DROPPED = 'dropped',
-  SUSPENDED = 'suspended',
-}
-
+import  { EnrollmentStatus }from '../../common/enums/enrollment-status.enum';
+import  { AuditableEntity} from '../../common/entities/audit-table.entity' ;
 @Entity('program_enrollments')
-export class ProgramEnrollment {
+export class ProgramEnrollment  extends AuditableEntity  {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -39,11 +32,4 @@ export class ProgramEnrollment {
   @ManyToOne(() => Program, (program) => program.id, { onDelete: 'CASCADE' })
   program: Program;
 
- 
-
-  @CreateDateColumn({ type: 'timestamptz' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ type: 'timestamptz' })
-  updatedAt: Date;
 }

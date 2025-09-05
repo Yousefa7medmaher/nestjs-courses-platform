@@ -34,6 +34,7 @@ import { ProgramCertificateModule } from './modules/program-certificate/program-
     VideosModule,
     ProgramEnrollmentModule,
     CertifcateModule,
+    ProgramCertificateModule
   ],
   controllers: [],
   providers: [
