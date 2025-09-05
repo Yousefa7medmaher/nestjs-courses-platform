@@ -22,7 +22,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Course } from '../courses/entities/course.entity';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { UserRole } from 'src/modules/users/entities/user.entity';
+import { UserRole } from '../common/enums/user-role.enum';
 import { UploadFile } from '../common/decorators/upload-file.decorator';
 
 @Controller('lessons')

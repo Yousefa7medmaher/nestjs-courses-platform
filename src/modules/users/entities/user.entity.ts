@@ -10,11 +10,8 @@ import { Course } from '../../courses/entities/course.entity';
 import { CourseEnrollment } from '../../course-enrollment/entities/course-enrollment.entity';
 import { CourseCertificate } from '../../course-certificate/entities/certifcate.entity';
 import { ProgramCertificate} from '../../program-certificate/entities/program-certificate.entity';
-export enum UserRole {
-  STUDENT = 'student',
-  INSTRUCTOR = 'instructor',
-  ADMIN = 'admin',
-}
+import { UserRole } from '../../common/enums/user-role.enum';
+
 
 @Entity('users')
 export class User {
@@ -52,11 +49,11 @@ export class User {
   @OneToMany(() => Course, (course) => course.instructor)
   courses: Course[];
 
-@OneToMany(() => CourseCertificate, (certificate) => certificate.user)
-courseCertificates: CourseCertificate[];
+  @OneToMany(() => CourseCertificate, (certificate) => certificate.user)
+  courseCertificates: CourseCertificate[];
 
-@OneToMany(() => ProgramCertificate, (certificate) => certificate.user)
-programCertificates: ProgramCertificate[];
+  @OneToMany(() => ProgramCertificate, (certificate) => certificate.user)
+  programCertificates: ProgramCertificate[];
 
   @OneToMany(() => CourseEnrollment, (enrollment) => enrollment.user)
   courseEnrollments: CourseEnrollment[];

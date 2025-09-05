@@ -3,7 +3,7 @@ import { AssignmentService } from './assigments.service';
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssigmentDto } from './dto/update-assigment.dto';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { User, UserRole } from '../users/entities/user.entity';
+import {   UserRole } from '../common/enums/user-role.enum';
 import { UploadFile } from '../common/decorators/upload-file.decorator';
 import { UploadedFile } from '@nestjs/common';
 

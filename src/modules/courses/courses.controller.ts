@@ -4,7 +4,7 @@ import { Course } from './entities/course.entity';
 import { CreateCourseDto } from './dto/cousres.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { UserRole } from '../users/entities/user.entity';
+import { UserRole } from '../common/enums/user-role.enum';
 import { Public } from '../auth/decorators/public.decorator';
 import { UploadFile } from '../common/decorators/upload-file.decorator';
 import { UploadedFile } from '@nestjs/common';

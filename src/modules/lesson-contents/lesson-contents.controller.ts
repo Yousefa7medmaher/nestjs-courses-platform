@@ -3,7 +3,7 @@ import { LessonContentService } from './lesson-contents.service';
 import { CreateLessonContentDto } from './dto/create-lesson-content.dto';
 import { UpdateLessonContentDto } from './dto/update-lesson-content.dto';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { UserRole } from '../users/entities/user.entity';
+import { UserRole } from '../common/enums/user-role.enum';
 import { UploadFile } from '../common/decorators/upload-file.decorator';
 import { UploadedFile } from '@nestjs/common'; 
 
