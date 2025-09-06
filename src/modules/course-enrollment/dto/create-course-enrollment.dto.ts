@@ -1,5 +1,6 @@
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsDateString, Min, Max } from 'class-validator';
 import { EnrollmentStatus } from '../../common/enums/enrollment-status.enum';
+import { IsUserExist } from '../../common/decorators/is-user-exist.decorator'  ;
 
 export class CreateCourseEnrollmentDto {
   @IsEnum(EnrollmentStatus)
@@ -27,6 +28,7 @@ export class CreateCourseEnrollmentDto {
   @IsOptional()
   notes?: string;
 
+  @IsUserExist({ message: 'User id is invalid or does not exist' })
   @IsInt()
   @IsNotEmpty()
   userId: number;
