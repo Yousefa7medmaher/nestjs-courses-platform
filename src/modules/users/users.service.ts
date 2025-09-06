@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserMapper } from './user.mapper';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -13,30 +14,30 @@ export class UsersService {
     private usersRepo: Repository<User>,
   ) {}
 
-  /** CREATE a new user */
-  async create(dto: CreateUserDto): Promise<User> {
-    const passwordHash = await bcrypt.hash(dto.password, 10);
-    const user = this.usersRepo.create({ ...dto, passwordHash });
-    return this.usersRepo.save(user);
+  async create(dto: CreateUserDto) {
+    const userEntity = UserMapper.toEntity(dto);  
+    const savedUser = await this.usersRepo.save(userEntity);
+    return UserMapper.toDto(savedUser); 
   }
 
-  /** GET all users */
-  async findAll(): Promise<User[]> {
-    return this.usersRepo.find();
+  async findAll() {
+    const users = await this.usersRepo.find();
+    return users.map(user => UserMapper.toDto(user));
   }
 
-  /** GET a single user by ID */
-  async findOne(id: number): Promise<User | null> {
-    return this.usersRepo.findOneBy({ id });
+  async findOne(id: number) {
+    const user = await this.usersRepo.findOneBy({ id });
+    if (!user) throw new NotFoundException(`User with ID ${id} not found`);
+    return UserMapper.toDto(user);
   }
 
-  /** GET a single user by email (useful for login) */
-  async findByEmail(email: string): Promise<User | null> {
-    return this.usersRepo.findOneBy({ email });
+  async findByEmail(email: string) {
+    const user = await this.usersRepo.findOneBy({ email });
+    if (!user) return null;
+    return UserMapper.toDto(user);
   }
 
-  /** UPDATE user by ID */
-  async update(id: number, dto: UpdateUserDto): Promise<User> {
+  async update(id: number, dto: UpdateUserDto) {
     const user = await this.usersRepo.findOneBy({ id });
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
@@ -48,15 +49,16 @@ export class UsersService {
     }
 
     this.usersRepo.merge(user, dto);
-    return this.usersRepo.save(user);
+    const updatedUser = await this.usersRepo.save(user);
+    return UserMapper.toDto(updatedUser);
   }
 
-  /** DELETE user by ID */
-  async remove(id: number): Promise<User> {
+  async remove(id: number) {
     const user = await this.usersRepo.findOneBy({ id });
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
-    return this.usersRepo.remove(user);
+    const removedUser = await this.usersRepo.remove(user);
+    return UserMapper.toDto(removedUser);
   }
 }
