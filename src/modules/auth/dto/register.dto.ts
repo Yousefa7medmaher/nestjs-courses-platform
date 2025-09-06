@@ -1,5 +1,7 @@
 import { IsEmail, IsNotEmpty, MinLength, IsOptional, IsEnum } from 'class-validator';
 import { UserRole } from '../../common/enums/user-role.enum';
+import { IsEgyptianPhoneNumber } from '../../common/decorators/is-egyptian-phone.decorator';
+
 
 export class RegisterDto {
   @IsNotEmpty({ message: 'Name is required' })
@@ -11,6 +13,7 @@ export class RegisterDto {
   @MinLength(6, { message: 'Password must be at least 6 characters long' })
   password: string;  
 
+  @IsEgyptianPhoneNumber({message: 'Please enter a valid Egyptian phone number' })
   @IsOptional()
   phoneNumber?: string;
 

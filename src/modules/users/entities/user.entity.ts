@@ -1,9 +1,7 @@
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
+  Column, 
   OneToMany,
 } from 'typeorm';
 import { Course } from '../../courses/entities/course.entity';
@@ -12,7 +10,7 @@ import { CourseCertificate } from '../../course-certificate/entities/certifcate.
 import { ProgramCertificate} from '../../program-certificate/entities/program-certificate.entity';
 import { UserRole } from '../../common/enums/user-role.enum';
 import { AuditableEntity } from '../../common/entities/audit-table.entity' ; 
-
+ 
 
 @Entity('users')
 export class User  extends AuditableEntity {
