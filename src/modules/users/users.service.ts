@@ -6,12 +6,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserMapper } from './user.mapper';
 import * as bcrypt from 'bcrypt';
+import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
-    private usersRepo: Repository<User>,
+    private usersRepo:UserRepository, 
   ) {}
 
   async create(dto: CreateUserDto) {
@@ -30,12 +30,7 @@ export class UsersService {
     if (!user) throw new NotFoundException(`User with ID ${id} not found`);
     return UserMapper.toDto(user);
   }
-
-  async findByEmail(email: string) {
-    const user = await this.usersRepo.findOneBy({ email });
-    if (!user) return null;
-    return UserMapper.toDto(user);
-  }
+ 
 
   async update(id: number, dto: UpdateUserDto) {
     const user = await this.usersRepo.findOneBy({ id });
@@ -60,5 +55,9 @@ export class UsersService {
     }
     const removedUser = await this.usersRepo.remove(user);
     return UserMapper.toDto(removedUser);
+  }
+
+  async getUserByEmail(email: string) {
+    return await this.usersRepo.findByEmail(email);
   }
 }

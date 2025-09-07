@@ -38,6 +38,12 @@ export class UsersController {
     return this.usersService.remove(userId);
   }
 
+  @Get(':email')
+  @Roles(UserRole.ADMIN) 
+  async findByEmail(@Param('email') email: string) {
+    return await this.usersService.getUserByEmail(email);
+  }
+  
   /** GET all users - Admin only */
   @Get()
   @Roles(UserRole.ADMIN)
