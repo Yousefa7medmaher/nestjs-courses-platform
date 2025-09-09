@@ -1,13 +1,18 @@
 import { Module } from '@nestjs/common';
 import { CourseEnrollmentService } from './course-enrollment.service';
 import { CourseEnrollmentController } from './course-enrollment.controller';
-import { User } from '../users/entities/user.entity'; 
-import { Course } from '../courses/entities/course.entity';
-import  { TypeOrmModule } from '@nestjs/typeorm'; 
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { CourseEnrollment } from './entities/course-enrollment.entity';
+import { UsersModule } from '../users/users.module'; 
+import { CoursesModule } from '../courses/courses.module';
+
 @Module({
-  imports: [TypeOrmModule.forFeature([CourseEnrollment , User , Course ])],
+  imports: [
+    TypeOrmModule.forFeature([CourseEnrollment]),
+    UsersModule, 
+    CoursesModule, 
+  ],
   providers: [CourseEnrollmentService],
-  controllers: [CourseEnrollmentController]
+  controllers: [CourseEnrollmentController],
 })
 export class CourseEnrollmentModule {}
