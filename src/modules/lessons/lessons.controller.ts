@@ -24,20 +24,20 @@ import { Course } from '../courses/entities/course.entity';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { UserRole } from '../../common/enums/user-role.enum';
 import { UploadFile } from '../../common/decorators/upload-file.decorator';
+import { CoursesService } from '../courses/courses.service';
 
 @Controller('lessons')
 export class LessonsController {
   constructor(
     private readonly lessonsService: LessonsService,
-    @InjectRepository(Course)
-    private readonly courseRepo: Repository<Course>,
+    private readonly courseService : CoursesService
   ) {}
 
   @Post()
   @Roles(UserRole.INSTRUCTOR, UserRole.ADMIN)
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async create(@Body() dto: CreateLessonDto): Promise<Lesson> {
-    const course = await this.courseRepo.findOne({ where: { id: dto.courseId } });
+    const course = await this.courseService.findOne(dto.courseId);
     if (!course) throw new NotFoundException('Course not found');
 
     return this.lessonsService.create(dto, course);
@@ -64,13 +64,8 @@ export class LessonsController {
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateLessonDto,
-  ): Promise<Lesson> {
-    const course = await this.courseRepo.findOne({ where: { id: dto.courseId } });
-    if (!course) {
-      throw new NotFoundException(`Course with ID ${dto.courseId} not found`);
-    }
-
-    return this.lessonsService.update(id, dto, course);
+  ): Promise<Lesson> { 
+    return this.lessonsService.update(id, dto);
   }
 
   @Delete(':id')

@@ -1,4 +1,4 @@
-import { Controller, Query, Param, ParseIntPipe, Body, Get, Post, Put, Delete } from '@nestjs/common';
+import { Controller, Query, Param, ParseIntPipe, Body, Get, Post, Put, Delete, Injectable } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import { Course } from './entities/course.entity';
 import { CreateCourseDto } from './dto/cousres.dto';
@@ -8,17 +8,16 @@ import { UserRole } from '../../common/enums/user-role.enum';
 import { Public } from '../auth/decorators/public.decorator';
 import { UploadFile } from '../../common/decorators/upload-file.decorator';
 import { UploadedFile } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Program } from '../programs/entities/program.entity';
 import { NotFoundException } from '@nestjs/common';
+import { ProgramsService } from '../programs/programs.service';
 
 @Controller('courses')
 export class CoursesController {
   constructor(
-    private readonly coursesService: CoursesService,
-    @InjectRepository(Program)
-    private readonly programRepo: Repository<Program>, // 👉 ProgramRepo هنا في Controller
+    private readonly coursesService: CoursesService
+    ,
+    private readonly programService : ProgramsService ,
   ) {}
 
   @Public()
@@ -42,7 +41,7 @@ export class CoursesController {
     let program: Program | null = null;
 
     if (dto.programId) {
-      program = await this.programRepo.findOne({ where: { id: dto.programId } });
+      program = await this.programService.findOne(dto.programId);
       if (!program) throw new NotFoundException('Program not found');
     }
 
@@ -67,7 +66,7 @@ export class CoursesController {
     let program: Program | null = null;
 
     if (dto.programId) {
-      program = await this.programRepo.findOne({ where: { id: dto.programId } });
+      program = await this.programService.findOne(dto.programId);
       if (!program) throw new NotFoundException('Program not found');
     }
 

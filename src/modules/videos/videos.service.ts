@@ -5,7 +5,7 @@ import { Video } from './entities/video.entity';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { LessonContent } from '../lesson-contents/entities/lesson-content.entity';
-import { LessonContentType } from '../lesson-contents/entities/lesson-content-type.enum';
+import { LessonContentType } from '../../common/enums/lesson-content-type.enum';
 
 @Injectable()
 export class VideosService {

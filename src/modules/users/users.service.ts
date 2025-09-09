@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserMapper } from './user.mapper';
+import { UserMapper } from './mappers/user.mapper';
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from './user.repository';
 

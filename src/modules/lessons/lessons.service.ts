@@ -32,7 +32,7 @@ export class LessonsService {
   }
 
   async findOne(id: number): Promise<Lesson> {
-    const lesson = await this.lessonRepo.findOne({ where: { id }, relations: ['course'] });
+    const lesson = await this.lessonRepo.findOne({ where: { id } });
     if (!lesson) throw new NotFoundException('Lesson not found');
     return lesson;
   }

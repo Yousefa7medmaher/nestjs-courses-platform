@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, Column, ManyToOne, CreateDateColumn, OneToMany } from 'typeorm';
 import { Lesson } from '../../lessons/entities/lesson.entity';
-import { LessonContentType } from './lesson-content-type.enum';
+import { LessonContentType } from '../../../common/enums/lesson-content-type.enum';
 import { Quiz } from '../../Quiz/entities/quiz.entity';
 import { Assignment } from '../../assignments/entities/assigment.entity';
 import { Video } from '../../videos/entities/video.entity';

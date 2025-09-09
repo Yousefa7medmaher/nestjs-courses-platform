@@ -11,5 +11,6 @@ import { LessonContent } from '../lesson-contents/entities/lesson-content.entity
   ],
   controllers: [AssignmentsController],
   providers: [AssignmentService],
+  exports:[AssignmentService]
 })
 export class AssigmentsModule {}

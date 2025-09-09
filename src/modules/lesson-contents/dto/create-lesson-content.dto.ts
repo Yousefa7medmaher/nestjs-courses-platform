@@ -1,6 +1,6 @@
 import { IsEnum, IsNotEmpty, IsOptional, IsString, IsUrl, IsNumber, ValidateNested, IsObject } from 'class-validator';
 import { Type } from 'class-transformer';
-import { LessonContentType } from '../entities/lesson-content-type.enum';
+import { LessonContentType } from '../../../common/enums/lesson-content-type.enum';
 import { CreateQuizDto } from 'src/modules/Quiz/dto/create-quiz.dto';
 import { CreateVideoDto } from 'src/modules/videos/dto/create-video.dto';
 import { CreateAssignmentDto } from '../../assignments/dto/create-assignment.dto';

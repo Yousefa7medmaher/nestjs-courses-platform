@@ -1,6 +1,6 @@
 // src/modules/users/user.mapper.ts
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './entities/user.entity';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { User } from '../entities/user.entity';
 import * as bcrypt from 'bcrypt';
 
 export class UserMapper {
