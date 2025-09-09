@@ -35,11 +35,10 @@ export class CoursesService {
     return { data, total, page, limit };
   }
 
-  // courses.service.ts
-  async findEntityById(id: number): Promise<Course> {
+   async findEntityById(id: number): Promise<Course> {
     const course = await this.courseRepo.findOne({
       where: { id },
-      relations: ['teacher', 'enrollments'],
+    relations: ['instructor', 'enrollments', 'lessons', 'program'],  
     });
     if (!course) throw new NotFoundException(`Course with ID ${id} not found`);
     return course;
