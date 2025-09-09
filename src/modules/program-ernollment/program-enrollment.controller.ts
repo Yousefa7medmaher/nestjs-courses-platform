@@ -4,7 +4,7 @@ import { CreateProgramEnrollmentDto } from './dto/create-program-enrollment.dto'
 import { UpdateProgramEnrollmentDto } from './dto/update-program-enrollment.dto';
 import { Roles } from '../auth/decorators/roles.decorator';
 import {  User } from '../users/entities/user.entity';
-import { UserRole } from '../common/enums/user-role.enum';
+import { UserRole } from '../../common/enums/user-role.enum';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { InjectRepository } from '@nestjs/typeorm';

@@ -1,12 +1,14 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { baseColumns } from "../common/helpers/base-columns";
 
 export class CreateProgramCertificatesTable1756934341863 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
+        const [ idColumn , ...auditColumns] = baseColumns; 
             await queryRunner.createTable(
                 new Table({
                     name: "Program-certificates",  
                     columns: [
-                        ...require("./helpers/audit-columns").baseColumns(),
+                        idColumn,
                         {
                             name: "certificateCode",
                             type: "varchar",
@@ -28,6 +30,7 @@ export class CreateProgramCertificatesTable1756934341863 implements MigrationInt
                             type: "int",
                             isNullable: true,
                         },
+                        ...auditColumns
                     ],
                     uniques: [
                         { columnNames: ["certificateCode"] },

@@ -8,8 +8,8 @@ import { Course } from '../../courses/entities/course.entity';
 import { CourseEnrollment } from '../../course-enrollment/entities/course-enrollment.entity';
 import { CourseCertificate } from '../../course-certificate/entities/certifcate.entity';
 import { ProgramCertificate} from '../../program-certificate/entities/program-certificate.entity';
-import { UserRole } from '../../common/enums/user-role.enum';
-import { AuditableEntity } from '../../common/entities/audit-table.entity' ; 
+import { UserRole } from '../../../common/enums/user-role.enum';
+import { AuditableEntity } from '../../../common/entities/audit-table.entity' ; 
  
 
 @Entity('users')

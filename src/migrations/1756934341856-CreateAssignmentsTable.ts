@@ -1,13 +1,15 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { baseColumns } from "../common/helpers/base-columns";
 
 export class CreateAssignmentsTable1756934341856 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
+        const [idColumn , ...auditColumns] = baseColumns ;
             await queryRunner.createTable(
                 new Table({
                     name: "assignments",
                     columns: [
-                        ...require("./helpers/audit-columns").baseColumns(),
-                        {
+                        idColumn ,
+                       {
                             name: "title",
                             type: "varchar",
                             isNullable: false,
@@ -27,6 +29,7 @@ export class CreateAssignmentsTable1756934341856 implements MigrationInterface {
                             type: "timestamp",
                             isNullable: true,
                         },
+                        ...auditColumns
                     ],
                 }),
                 true // optional safeguard

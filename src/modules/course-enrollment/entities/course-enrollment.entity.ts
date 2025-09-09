@@ -11,8 +11,8 @@ import {
 import { User } from '../../users/entities/user.entity';
 import { Course } from '../../courses/entities/course.entity';
 import { CourseCertificate } from '../../course-certificate/entities/certifcate.entity';
-import  { AuditableEntity  }  from '../../common/entities/audit-table.entity' ;
-import   { EnrollmentStatus} from '../../common/enums/enrollment-status.enum'
+import  { AuditableEntity  }  from '../../../common/entities/audit-table.entity' ;
+import   { EnrollmentStatus} from '../../../common/enums/enrollment-status.enum'
 
 @Entity('course_enrollments')
 @Unique('IDX_course_enrollments_user_course', ['user', 'course'])

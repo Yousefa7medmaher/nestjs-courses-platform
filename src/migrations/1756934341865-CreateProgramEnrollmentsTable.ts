@@ -1,13 +1,16 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { baseColumns } from "../common/helpers/base-columns";
+
 
 export class CreateProgramEnrollmentsTable1756934341865 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
+        const [ idColumn  , ...auditColumns ] = baseColumns ;
             await queryRunner.createTable(
                 new Table({
                     name: "program_enrollments",
                     columns: [
-                        ...require("./helpers/audit-columns").baseColumns(),
-                        {
+                        idColumn ,
+                         {
                             name: "status",
                             type: "varchar",
                             default: "'active'", // Enum handled in entity
@@ -52,6 +55,7 @@ export class CreateProgramEnrollmentsTable1756934341865 implements MigrationInte
                             type: "int",
                             isNullable: true,
                         },
+                        ...auditColumns
                     ],
                 }),
                 true // optional safeguard

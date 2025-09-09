@@ -3,9 +3,9 @@ import { VideosService } from './videos.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { UserRole } from '../common/enums/user-role.enum';
+import { UserRole } from '../../common/enums/user-role.enum';
 import { UploadedFile } from '@nestjs/common';
-import { UploadFile } from '../common/decorators/upload-file.decorator';
+import { UploadFile } from '../../common/decorators/upload-file.decorator';
 
 @Controller('videos')
 export class VideosController {

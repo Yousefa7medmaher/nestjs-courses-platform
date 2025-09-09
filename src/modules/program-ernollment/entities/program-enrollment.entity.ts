@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, OneToMany, UpdateDateColumn } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { Program } from '../../programs/entities/program.entity';
-import  { EnrollmentStatus }from '../../common/enums/enrollment-status.enum';
-import  { AuditableEntity} from '../../common/entities/audit-table.entity' ;
+import  { EnrollmentStatus }from '../../../common/enums/enrollment-status.enum';
+import  { AuditableEntity} from '../../../common/entities/audit-table.entity' ;
 @Entity('program_enrollments')
 export class ProgramEnrollment  extends AuditableEntity  {
   @PrimaryGeneratedColumn()

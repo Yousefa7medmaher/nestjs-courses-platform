@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { LessonContent } from '../../lesson-contents/entities/lesson-content.entity';
-import  {AuditableEntity  } from '../../common/entities/audit-table.entity';
+import  {AuditableEntity  } from '../../../common/entities/audit-table.entity';
 @Entity('videos')
 export class Video  extends AuditableEntity {
   @PrimaryGeneratedColumn()

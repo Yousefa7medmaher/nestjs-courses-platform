@@ -1,6 +1,6 @@
 import { IsEnum, IsNotEmpty, IsOptional, IsNumber, IsDateString, IsString } from 'class-validator';
-import { EnrollmentStatus } from '../../common/enums/enrollment-status.enum';
-import { IsUserExist } from '../../common/decorators/is-user-exist.decorator'  ;
+import { EnrollmentStatus } from '../../../common/enums/enrollment-status.enum';
+import { IsUserExist } from '../../../common/decorators/is-user-exist.decorator'  ;
 
 
 

@@ -1,12 +1,15 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { baseColumns } from "../common/helpers/base-columns";
+import { audit } from "rxjs";
 
 export class CreateUsersTable1756934341864 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
+        const [ idColumn , ...auditColumns ] = baseColumns ;
             await queryRunner.createTable(
                 new Table({
                     name: "users",
                     columns: [
-                        ...require("./helpers/audit-columns").baseColumns(),
+                            idColumn ,
                         {
                             name: "name",
                             type: "varchar",
@@ -40,6 +43,7 @@ export class CreateUsersTable1756934341864 implements MigrationInterface {
                             default: "'student'", // Enum handled in entity
                             isNullable: false,
                         },
+                        ...auditColumns
                     ],
                     uniques: [
                         { columnNames: ["email"] },

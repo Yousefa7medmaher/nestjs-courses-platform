@@ -1,12 +1,14 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { baseColumns } from "../common/helpers/base-columns";
 
 export class CreateLessonContentsTable1756934341858 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
+        const [ idColumn , ...auditColumns] = baseColumns ;
             await queryRunner.createTable(
                 new Table({
                     name: "lesson_contents",
                     columns: [
-                        ...require("./helpers/audit-columns").baseColumns(),
+                        idColumn , 
                         {
                             name: "type",
                             type: "varchar",
@@ -37,6 +39,7 @@ export class CreateLessonContentsTable1756934341858 implements MigrationInterfac
                             type: "int",
                             isNullable: true,
                         },
+                        ...auditColumns
                     ],
                     uniques: [
                         { columnNames: ["videoId"] },

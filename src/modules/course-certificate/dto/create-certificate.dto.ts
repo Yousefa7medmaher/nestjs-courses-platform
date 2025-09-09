@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsOptional, IsDateString, IsString, Length } from 'class-validator';
-import { IsUserExist } from '../../common/decorators/is-user-exist.decorator'  ;
+import { IsUserExist } from '../../../common/decorators/is-user-exist.decorator'  ;
 export class CreateCertificateDto {
   @IsString()
   @Length(5, 255)

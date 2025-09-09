@@ -1,7 +1,7 @@
 // src/programs/entities/program.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Course } from '../../courses/entities/course.entity';
-import  { AuditableEntity } from '../../common/entities/audit-table.entity'; 
+import  { AuditableEntity } from '../../../common/entities/audit-table.entity'; 
 
 @Entity('programs')
 export class Program extends AuditableEntity {

@@ -20,6 +20,17 @@ export class UsersService {
     return UserMapper.toDto(savedUser); 
   }
 
+  // users.service.ts
+async findEntityById(id: number): Promise<User> {
+  const user = await this.usersRepo.findOne({
+    where: { id },
+    relations: ['enrollments', 'courses', 'courseCertificates', 'programCertificates'],
+  });
+  if (!user) throw new NotFoundException(`User with ID ${id} not found`);
+  return user;
+}
+
+
   async findAll() {
     const users = await this.usersRepo.find();
     return users.map(user => UserMapper.toDto(user));

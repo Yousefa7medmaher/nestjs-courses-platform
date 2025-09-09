@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CourseEnrollment } from './entities/course-enrollment.entity';
@@ -15,15 +15,23 @@ export class CourseEnrollmentService {
   ) {}
 
   /** CREATE new enrollment */
-  async create(dto: CreateCourseEnrollmentDto, user: User, course: Course): Promise<CourseEnrollment> {
+  async create(
+    dto: CreateCourseEnrollmentDto,
+    user: User,
+    course: Course,
+  ): Promise<CourseEnrollment> {
     const existingEnrollment = await this.enrollmentRepo.findOne({
       where: {
         user: { id: user.id },
         course: { id: course.id },
       },
     });
+
     if (existingEnrollment) {
-      throw new NotFoundException(`User ${user.id} is already enrolled in course ${course.id}`);
+      // FIX: throw ConflictException instead of NotFoundException
+      throw new ConflictException(
+        `User ${user.id} is already enrolled in course ${course.id}`,
+      );
     }
 
     const enrollment = this.enrollmentRepo.create({
@@ -55,7 +63,10 @@ export class CourseEnrollmentService {
   }
 
   /** UPDATE enrollment */
-  async update(id: number, dto: UpdateCourseEnrollmentDto): Promise<CourseEnrollment> {
+  async update(
+    id: number,
+    dto: UpdateCourseEnrollmentDto,
+  ): Promise<CourseEnrollment> {
     const enrollment = await this.findOne(id);
 
     Object.assign(enrollment, dto);

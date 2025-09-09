@@ -4,10 +4,10 @@ import { CreateProgramDto } from './dto/create-program.dto';
 import { UpdateProgramDto } from './dto/update-program.dto';
 import { Program } from './entities/program.entity';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { UserRole } from '../common/enums/user-role.enum';
+import { UserRole } from '../../common/enums/user-role.enum';
 import { Public } from '../auth/decorators/public.decorator';
 import { UploadedFile } from '@nestjs/common'; 
-import { UploadFile } from '../common/decorators/upload-file.decorator'; 
+import { UploadFile } from '../../common/decorators/upload-file.decorator'; 
 
 @Controller('programs')
 export class ProgramsController {

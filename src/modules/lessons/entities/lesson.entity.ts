@@ -2,7 +2,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Course } from '../../courses/entities/course.entity';
 import { LessonContent } from '../../lesson-contents/entities/lesson-content.entity';
-import {  AuditableEntity } from '../../common/entities/audit-table.entity' ; 
+import {  AuditableEntity } from '../../../common/entities/audit-table.entity' ; 
 
 @Entity('lessons')
 export class Lesson {

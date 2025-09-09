@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, MinLength, IsOptional } from 'class-validator';
-import { IsEgyptianPhoneNumber } from '../../common/decorators/is-egyptian-phone.decorator';
+import { IsEgyptianPhoneNumber } from '../../../common/decorators/is-egyptian-phone.decorator';
 
 
 export class CreateUserDto {
@@ -12,8 +12,8 @@ export class CreateUserDto {
   @MinLength(6)
   password: string;  
 
-  @IsEgyptianPhoneNumber({message: 'Please enter a valid Egyptian phone number' })
   @IsOptional()
+  @IsEgyptianPhoneNumber({message: 'Please enter a valid Egyptian phone number' })
   phoneNumber?: string;
 
   @IsOptional()

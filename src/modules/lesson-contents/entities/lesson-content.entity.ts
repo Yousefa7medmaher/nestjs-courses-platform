@@ -4,7 +4,7 @@ import { LessonContentType } from './lesson-content-type.enum';
 import { Quiz } from '../../Quiz/entities/quiz.entity';
 import { Assignment } from '../../assignments/entities/assigment.entity';
 import { Video } from '../../videos/entities/video.entity';
-import { AuditableEntity  } from '../../common/entities/audit-table.entity' ;
+import { AuditableEntity  } from '../../../common/entities/audit-table.entity' ;
 
 @Entity('lesson_contents')
 export class LessonContent {

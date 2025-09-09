@@ -1,6 +1,6 @@
 // src/modules/program-certificate/dto/create-program-certificate.dto.ts
 import { IsNotEmpty, IsDateString, IsOptional, IsNumber } from 'class-validator';
-import { IsUserExist } from '../../common/decorators/is-user-exist.decorator'  ;
+import { IsUserExist } from '../../../common/decorators/is-user-exist.decorator'  ;
 
 
 export class CreateProgramCertificateDto {

@@ -4,7 +4,7 @@ import { Program } from '../../programs/entities/program.entity';
 import { Lesson } from '../../lessons/entities/lesson.entity';
 import { User } from '../../users/entities/user.entity';
 import  { CourseEnrollment } from  '../../course-enrollment/entities/course-enrollment.entity';
-import { AuditableEntity } from '../../common/entities/audit-table.entity' ;
+import { AuditableEntity } from '../../../common/entities/audit-table.entity' ;
 
 @Entity('courses')
 export class Course extends AuditableEntity   {

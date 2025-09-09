@@ -6,7 +6,7 @@ import {
   CreateDateColumn 
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
-import { AuditableEntity } from '../../common/entities/audit-table.entity'; 
+import { AuditableEntity } from '../../../common/entities/audit-table.entity'; 
 
 @Entity('Program-certificates')
 export class ProgramCertificate {
