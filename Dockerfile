@@ -1,21 +1,34 @@
-# Use official Node.js LTS image
-FROM node:20-alpine
+FROM node:20-alpine AS builder
+ARG NODE_ENV=development
+ENV NODE_ENV $NODE_ENV
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
-COPY package.json package-lock.json* ./
-RUN npm install --production
+COPY package*.json ./
 
-# Copy source code
+RUN npm ci
 COPY . .
 
-# Build TypeScript
 RUN npm run build
 
-# Expose port (default NestJS port)
+FROM node:20-alpine AS production
+
+WORKDIR /app
+
+RUN addgroup -S app && adduser -S -G app app
+USER app
+
+ENV NODE_ENV=production
+ENV PORT=3000
+
+COPY --from=builder --chown=app:app /app/package*.json ./
+RUN npm ci --only=production
+
+COPY --from=builder --chown=app:app /app/dist ./dist
+COPY --from=builder --chown=app:app /app/src ./src
+
 EXPOSE 3000
 
-# Start the app
+
+
 CMD ["node", "dist/main.js"]
