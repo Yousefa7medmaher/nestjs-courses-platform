@@ -1,0 +1,36 @@
+name: CI Nest-js 
+on:
+  push: 
+    branches: [main]
+  pull_request: 
+    branches: [main] 
+  workflow_dispatch: 
+jobs:
+  Build: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup Node.js environment
+        uses: actions/setup-node@v6.2.0
+        with:
+          node_version: '20'
+      - name: Install packages 
+        run: npm ci 
+      - name: test 
+        run: npm run test 
+  DeployToDocker: 
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Docker Login 
+        uses: docker/login-action@v3.7.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERPASSWORD }}
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v6.19.2
+        with:
+            context: . 
+            push: true 
+            tags: | 
+              yousef2005/coursesplatform-nestjs:v1.0.${{ github.run_number }}
+              yousef2005/coursesplatform-nestjs:latest 
+              
