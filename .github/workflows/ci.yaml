@@ -30,8 +30,8 @@ jobs:
           username: ${{ secrets.DOCKERUSERNAME }}
           password: ${{ secrets.DOCKERPASSWORD }}
       - name: Build Docker Image 
-        run: | 
-          docker build -t yousef2005/coursesplatform-nestjs:${{ github.run_number }}
+        run: |
+          docker build -t yousef2005/coursesplatform-nestjs:${{ github.run_number }} .
       - name: Run Trivy Scan 
         uses: aquasecurity/trivy-action@master
         with:
