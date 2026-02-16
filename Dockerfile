@@ -15,7 +15,6 @@ FROM node:20-alpine AS production
 WORKDIR /app
 
 RUN addgroup -S app && adduser -S -G app app
-USER app
 
 ENV PORT=3000
 
@@ -24,6 +23,7 @@ RUN npm install  --only=production
 
 COPY --from=builder --chown=app:app /app/dist ./dist
 COPY --from=builder --chown=app:app /app/src ./src
+USER app
 
 EXPOSE 3000
 
