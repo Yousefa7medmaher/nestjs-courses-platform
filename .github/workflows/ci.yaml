@@ -29,12 +29,20 @@ jobs:
         with:
           username: ${{ secrets.DOCKERUSERNAME }}
           password: ${{ secrets.DOCKERPASSWORD }}
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v6.19.2
+      - name: Build Docker Image 
+        run: | 
+          docker build -t yousef2005/coursesplatform-nestjs:${{ github.run_number }}
+      - name: Run Trivy Scan 
+        uses: aquasecurity/trivy-action@master
         with:
-            context: . 
-            push: true 
-            tags: | 
-              yousef2005/coursesplatform-nestjs:v1.0.${{ github.run_number }}
-              yousef2005/coursesplatform-nestjs:latest 
-              
+          image-ref:  'yousef2005/coursesplatform-nestjs:${{ github.run_number }}'
+          format: 'table' 
+          exit-code: 1 
+          ignore_unfixed: true 
+          vuln_type: 'os,library' 
+          severity: 'CRITICAL,HIGH'
+      - name: Push Docker Image 
+        run: | 
+          docker push yousef2005/coursesplatform-nestjs:${{ github.run_number }} 
+          docker tag yousef2005/coursesplatform-nestjs:${{ github.run_number }} yousef2005/coursesplatform-nestjs:latest 
+          docker push yousef2005/coursesplatform-nestjs:latest
