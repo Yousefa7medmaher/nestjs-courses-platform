@@ -38,8 +38,8 @@ jobs:
           image-ref:  'yousef2005/coursesplatform-nestjs:${{ github.run_number }}'
           format: 'table' 
           exit-code: 1 
-          ignore_unfixed: true 
-          vuln_type: 'os,library' 
+          ignore-unfixed: true 
+          vuln-type: 'os,library' 
           severity: 'CRITICAL,HIGH'
       - name: Push Docker Image 
         run: | 
