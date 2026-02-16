@@ -22,7 +22,7 @@ ENV NODE_ENV=production
 ENV PORT=3000
 
 COPY --from=builder --chown=app:app /app/package*.json ./
-RUN npm ci --only=production
+RUN npm install  --only=production
 
 COPY --from=builder --chown=app:app /app/dist ./dist
 COPY --from=builder --chown=app:app /app/src ./src
