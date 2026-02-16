@@ -14,7 +14,7 @@ jobs:
         with:
           node_version: '20'
       - name: Install packages 
-        run: npm ci 
+        run: npm install  
       - name: test 
         run: npm run test 
   DeployToDocker: 
